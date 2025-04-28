@@ -1,7 +1,7 @@
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Award, Star, Users } from 'lucide-react'; // Icons for achievements and team
+import { Award, Star, Users, MapPin, GraduationCap } from 'lucide-react'; // Icons for achievements, team, location, and education
 
 export default function AboutPage() {
   return (
@@ -18,8 +18,15 @@ export default function AboutPage() {
             <section>
               <h2 className="text-2xl font-semibold text-secondary-foreground mb-3">Our Story</h2>
               <p className="text-muted-foreground leading-relaxed">
-                TRAVELDAYS was founded by a passionate team of travel enthusiasts and hospitality experts: Adithyan, Adithya, Harsha, and Shaaz. With a shared vision to redefine travel experiences, we embarked on a journey to create a platform that combines seamless booking with personalized adventures. Our dedication stems from years of experience managing top-tier hotels and understanding the intricate desires of modern travelers.
+                TRAVELDAYS was founded by a passionate team of travel enthusiasts and aspiring hospitality experts: Adithyan, Adithya, Harsha, and Shaaz. Based in Karnataka, India, and currently second-year students, we share a vision to redefine travel experiences. We embarked on a journey to create a platform that combines seamless booking with personalized adventures. Our dedication stems from our learning and a deep understanding of the intricate desires of modern travelers, inspired by our experience managing top-tier hotels.
               </p>
+               <div className="flex items-center justify-center md:justify-start gap-2 mt-3 text-sm text-muted-foreground">
+                  <MapPin className="h-4 w-4 text-primary"/>
+                  <span>Karnataka, India</span>
+                  <span className="mx-1">|</span>
+                  <GraduationCap className="h-4 w-4 text-primary"/>
+                  <span>Second Year Students</span>
+               </div>
             </section>
 
             <section>
