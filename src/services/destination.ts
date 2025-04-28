@@ -39,11 +39,11 @@ const mockDestinations: Destination[] = [
     tags: ['relaxation', 'beach', 'luxury', 'tropical'],
   },
   {
-    id: 'kyoto',
-    name: 'Kyoto, Japan',
-    description: 'The cultural heart of Japan, famous for its beautiful temples, traditional gardens, and geisha district.',
-    imageUrls: ['https://picsum.photos/seed/kyoto/400/300'],
-    tags: ['culture', 'history', 'nature', 'spiritual'],
+    id: 'mumbai', // Changed from kyoto
+    name: 'Mumbai, India', // Changed from Kyoto, Japan
+    description: 'The vibrant financial capital of India, known for Bollywood, colonial architecture, and bustling street life. Price per stay: $950.', // Updated description and added price
+    imageUrls: ['https://picsum.photos/seed/mumbai/400/300'], // Changed seed
+    tags: ['culture', 'city', 'food', 'business'], // Updated tags
   },
   {
     id: 'machu-picchu',
@@ -111,3 +111,4 @@ export async function getDestinationById(id: string): Promise<Destination | null
   const destination = mockDestinations.find(dest => dest.id === id);
   return destination || null;
 }
+

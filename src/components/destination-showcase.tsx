@@ -7,7 +7,7 @@ import { DestinationCard } from '@/components/destination-card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card'; // Added CardFooter import
+import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card'; // Ensured CardFooter is imported
 
 export function DestinationShowcase() {
   const [destinations, setDestinations] = useState<Destination[]>([]);
@@ -136,3 +136,4 @@ export function DestinationShowcase() {
     </section>
   );
 }
+
