@@ -10,15 +10,18 @@ export function Header() {
           <MountainSnow className="h-6 w-6" />
           <span>TRAVELDAYS</span>
         </Link>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 md:gap-4"> {/* Adjusted gap for responsiveness */}
           <Link href="/destinations" passHref>
-             <Button variant="ghost" className="text-primary-foreground hover:bg-primary/80">Destinations</Button>
+             <Button variant="ghost" className="text-primary-foreground hover:bg-primary/80 px-2 md:px-4">Destinations</Button> {/* Added padding */}
           </Link>
           <Link href="/packages" passHref>
-             <Button variant="ghost" className="text-primary-foreground hover:bg-primary/80">Packages</Button>
+             <Button variant="ghost" className="text-primary-foreground hover:bg-primary/80 px-2 md:px-4">Packages</Button> {/* Added padding */}
+          </Link>
+          <Link href="/about" passHref>
+             <Button variant="ghost" className="text-primary-foreground hover:bg-primary/80 px-2 md:px-4">About</Button> {/* Added About link and padding */}
           </Link>
           <Link href="/login" passHref>
-            <Button variant="secondary">Login</Button>
+            <Button variant="secondary" size="sm" className="px-3 md:px-4">Login</Button> {/* Adjusted size and padding */}
           </Link>
         </div>
       </nav>
