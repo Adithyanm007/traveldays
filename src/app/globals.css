@@ -89,3 +89,10 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* Add sticky utility if not already present */
+@layer utilities {
+  .sticky {
+    position: sticky;
+  }
+}

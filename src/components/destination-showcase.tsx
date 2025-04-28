@@ -1,30 +1,30 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
-import type { Destination } from '@/services/destination';
+import { useState, useEffect } from 'react';
+import type { Destination } from '@/services/destination'; // Ensure Hotel is imported if added there
 import { getDestinations } from '@/services/destination';
 import { DestinationCard } from '@/components/destination-card';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Label } from '@/components/ui/label';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card'; // Ensured CardFooter is imported
+import { Card, CardContent, CardFooter } from '@/components/ui/card'; // Ensured CardFooter is imported
+import { PackageSearch } from 'lucide-react'; // Icon for empty state
+
+// Removed imports related to filtering: Checkbox, Label, useMemo, CardHeader, CardTitle
 
 export function DestinationShowcase() {
   const [destinations, setDestinations] = useState<Destination[]>([]);
-  const [filteredDestinations, setFilteredDestinations] = useState<Destination[]>([]);
-  const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  // Removed state related to filtering: filteredDestinations, selectedInterests
 
   useEffect(() => {
     async function loadDestinations() {
       try {
         setIsLoading(true);
         setError(null);
-        // Pass selected interests to the API call (though the mock doesn't use it yet)
-        const fetchedDestinations = await getDestinations({ interests: selectedInterests });
+        // Fetch all destinations without filtering
+        const fetchedDestinations = await getDestinations();
         setDestinations(fetchedDestinations);
-        setFilteredDestinations(fetchedDestinations); // Initially show all
       } catch (err) {
         console.error("Failed to load destinations:", err);
         setError("Failed to load destinations. Please try again later.");
@@ -35,105 +35,45 @@ export function DestinationShowcase() {
     loadDestinations();
   }, []); // Load once on mount
 
-  const allInterests = useMemo(() => {
-    const interestsSet = new Set<string>();
-    destinations.forEach(dest => dest.tags.forEach(tag => interestsSet.add(tag)));
-    return Array.from(interestsSet);
-  }, [destinations]);
-
-  useEffect(() => {
-    if (selectedInterests.length === 0) {
-      setFilteredDestinations(destinations);
-    } else {
-      setFilteredDestinations(
-        destinations.filter(dest =>
-          selectedInterests.some(interest => dest.tags.includes(interest))
-        )
-      );
-    }
-  }, [selectedInterests, destinations]);
-
-  const handleInterestChange = (interest: string, checked: boolean | string) => {
-    // Ensure checked is boolean
-    const isChecked = checked === true;
-
-    setSelectedInterests(prev =>
-      isChecked
-        ? [...prev, interest]
-        : prev.filter(i => i !== interest)
-    );
-  };
+  // Removed useMemo for allInterests and useEffect for filtering
 
   return (
     <section className="py-12">
       <h2 className="text-3xl font-bold text-center mb-8 text-primary">Explore Our Destinations</h2>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-        {/* Filter Section */}
-        <div className="md:col-span-1">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Filter by Interest</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              {isLoading ? (
-                 <>
-                    <Skeleton className="h-5 w-24 mb-2" />
-                    <Skeleton className="h-5 w-20 mb-2" />
-                    <Skeleton className="h-5 w-28" />
-                 </>
-              ) : error ? (
-                 <p className="text-destructive">{error}</p>
-              ): allInterests.length > 0 ? (
-                 allInterests.map((interest) => (
-                    <div key={interest} className="flex items-center space-x-2">
-                    <Checkbox
-                        id={interest}
-                        checked={selectedInterests.includes(interest)}
-                        onCheckedChange={(checked) => handleInterestChange(interest, checked)}
-                    />
-                    <Label htmlFor={interest} className="text-sm font-medium capitalize">
-                        {interest}
-                    </Label>
+      {/* Removed the grid wrapper and filter column */}
+      {/* Destination Grid now takes full width */}
+        {error && !isLoading && <p className="text-destructive text-center col-span-full">{error}</p>}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {isLoading
+            ? Array.from({ length: 8 }).map((_, index) => ( // Show more skeletons for full width
+                <Card key={index} className="w-full max-w-sm">
+                    <Skeleton className="h-48 w-full" />
+                    <CardContent className="p-4 space-y-2">
+                    <Skeleton className="h-5 w-3/4" />
+                    <Skeleton className="h-4 w-full" />
+                    <Skeleton className="h-4 w-1/2" />
+                    <div className="flex gap-2 pt-2">
+                        <Skeleton className="h-5 w-8" />
+                        <Skeleton className="h-5 w-12" />
                     </div>
+                    </CardContent>
+                    <CardFooter className="p-4 pt-0">
+                        <Skeleton className="h-9 w-24" />
+                    </CardFooter>
+                </Card>
                 ))
-              ) : (
-                 <p className="text-muted-foreground text-sm">No interests found.</p>
-              )}
-            </CardContent>
-          </Card>
+            : destinations.length > 0
+            ? destinations.map((destination) => (
+                <DestinationCard key={destination.id} destination={destination} /> // Use destination.id as key
+                ))
+            : !error && (
+                <div className="col-span-full flex flex-col items-center justify-center p-10 text-center">
+                    <PackageSearch className="h-16 w-16 text-muted-foreground mb-4" />
+                    <h3 className="text-xl font-semibold text-muted-foreground">No Destinations Available</h3>
+                    <p className="text-muted-foreground">Please check back later.</p>
+                </div>
+             )}
         </div>
-
-        {/* Destination Grid */}
-        <div className="md:col-span-3">
-            {error && !isLoading && <p className="text-destructive text-center col-span-full">{error}</p>}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {isLoading
-                ? Array.from({ length: 6 }).map((_, index) => (
-                    <Card key={index} className="w-full max-w-sm">
-                        <Skeleton className="h-48 w-full" />
-                        <CardContent className="p-4 space-y-2">
-                        <Skeleton className="h-5 w-3/4" />
-                        <Skeleton className="h-4 w-full" />
-                        <Skeleton className="h-4 w-1/2" />
-                        <div className="flex gap-2 pt-2">
-                            <Skeleton className="h-5 w-8" />
-                            <Skeleton className="h-5 w-12" />
-                        </div>
-                        </CardContent>
-                        <CardFooter className="p-4 pt-0">
-                            <Skeleton className="h-9 w-24" />
-                        </CardFooter>
-                    </Card>
-                    ))
-                : filteredDestinations.length > 0
-                ? filteredDestinations.map((destination) => (
-                    <DestinationCard key={destination.id} destination={destination} /> // Use destination.id as key
-                    ))
-                : !error && <p className="text-muted-foreground text-center col-span-full">No destinations match your selected interests.</p>}
-            </div>
-        </div>
-      </div>
     </section>
   );
 }
-

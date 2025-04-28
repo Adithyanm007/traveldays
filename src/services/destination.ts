@@ -1,4 +1,21 @@
 /**
+ * Represents hotel information.
+ */
+export interface Hotel {
+  /** Unique identifier for the hotel */
+  id: string;
+  /** Name of the hotel */
+  name: string;
+  /** Price indication (e.g., per night) */
+  price: string;
+  /** URL for the hotel image */
+  imageUrl: string;
+  /** Brief description or key feature */
+  description: string;
+}
+
+
+/**
  * Represents a travel destination.
  */
 export interface Destination {
@@ -20,9 +37,13 @@ export interface Destination {
    * An array of tags or categories associated with the destination (e.g., adventure, relaxation, culture).
    */
   tags: string[];
+  /**
+   * An array of hotels available at the destination.
+   */
+  hotels: Hotel[];
 }
 
-// Enhanced mock data
+// Enhanced mock data including hotels
 const mockDestinations: Destination[] = [
   {
     id: 'paris',
@@ -30,6 +51,10 @@ const mockDestinations: Destination[] = [
     description: 'The City of Love, known for its iconic Eiffel Tower, Louvre Museum, and romantic ambiance.',
     imageUrls: ['https://picsum.photos/seed/paris/400/300'],
     tags: ['culture', 'romance', 'city', 'history'],
+    hotels: [
+        { id: 'hotel-paris-1', name: 'Le Bristol Paris', price: '$1200/night', imageUrl: 'https://picsum.photos/seed/hotelparis1/200/150', description: 'Luxury palace hotel near Champs-Élysées.' },
+        { id: 'hotel-paris-2', name: 'Hotel Marignan Champs-Elysées', price: '$450/night', imageUrl: 'https://picsum.photos/seed/hotelparis2/200/150', description: 'Chic hotel with Eiffel Tower views.' },
+    ],
   },
   {
     id: 'bora-bora',
@@ -37,13 +62,21 @@ const mockDestinations: Destination[] = [
     description: 'A tropical paradise with crystal-clear waters, overwater bungalows, and stunning volcanic peaks.',
     imageUrls: ['https://picsum.photos/seed/borabora/400/300'],
     tags: ['relaxation', 'beach', 'luxury', 'tropical'],
+    hotels: [
+        { id: 'hotel-bora-1', name: 'Four Seasons Resort Bora Bora', price: '$1800/night', imageUrl: 'https://picsum.photos/seed/hotelbora1/200/150', description: 'Iconic overwater bungalows and spa.' },
+        { id: 'hotel-bora-2', name: 'The St. Regis Bora Bora Resort', price: '$2200/night', imageUrl: 'https://picsum.photos/seed/hotelbora2/200/150', description: 'Ultimate luxury with private butlers.' },
+    ],
   },
   {
-    id: 'mumbai', // Changed from kyoto
-    name: 'Mumbai, India', // Changed from Kyoto, Japan
-    description: 'The vibrant financial capital of India, known for Bollywood, colonial architecture, and bustling street life. Price per stay: $950.', // Updated description and added price
-    imageUrls: ['https://picsum.photos/seed/mumbai/400/300'], // Changed seed
-    tags: ['culture', 'city', 'food', 'business'], // Updated tags
+    id: 'mumbai',
+    name: 'Mumbai, India',
+    description: 'The vibrant financial capital of India, known for Bollywood, colonial architecture, and bustling street life. Price per stay: $950.',
+    imageUrls: ['https://picsum.photos/seed/mumbai/400/300'],
+    tags: ['culture', 'city', 'food', 'business'],
+    hotels: [
+        { id: 'hotel-mumbai-1', name: 'The Taj Mahal Palace', price: '$350/night', imageUrl: 'https://picsum.photos/seed/hotelmumbai1/200/150', description: 'Historic luxury hotel overlooking the Gateway of India.' },
+        { id: 'hotel-mumbai-2', name: 'Trident Nariman Point', price: '$200/night', imageUrl: 'https://picsum.photos/seed/hotelmumbai2/200/150', description: 'Modern hotel with panoramic ocean views.' },
+    ],
   },
   {
     id: 'machu-picchu',
@@ -51,6 +84,10 @@ const mockDestinations: Destination[] = [
     description: 'An ancient Incan citadel set high in the Andes Mountains, offering breathtaking views and historical significance.',
     imageUrls: ['https://picsum.photos/seed/machupicchu/400/300'],
     tags: ['adventure', 'history', 'mountains', 'hiking'],
+     hotels: [
+        { id: 'hotel-machu-1', name: 'Belmond Sanctuary Lodge', price: '$1500/night', imageUrl: 'https://picsum.photos/seed/hotelmachu1/200/150', description: 'Only hotel located adjacent to the citadel.' },
+        { id: 'hotel-machu-2', name: 'Inkaterra Machu Picchu Pueblo Hotel', price: '$600/night', imageUrl: 'https://picsum.photos/seed/hotelmachu2/200/150', description: 'Luxury eco-lodge in Aguas Calientes.' },
+    ],
   },
   {
     id: 'santorini',
@@ -58,6 +95,10 @@ const mockDestinations: Destination[] = [
     description: 'A picturesque island known for its white-washed villages perched on cliffs overlooking the Aegean Sea.',
     imageUrls: ['https://picsum.photos/seed/santorini/400/300'],
     tags: ['romance', 'beach', 'island', 'views'],
+     hotels: [
+        { id: 'hotel-santorini-1', name: 'Canaves Oia Suites', price: '$900/night', imageUrl: 'https://picsum.photos/seed/hotelsantorini1/200/150', description: 'Luxury suites with private plunge pools.' },
+        { id: 'hotel-santorini-2', name: 'Katikies Santorini', price: '$1100/night', imageUrl: 'https://picsum.photos/seed/hotelsantorini2/200/150', description: 'Cliffside hotel with infinity pools.' },
+    ],
   },
    {
     id: 'costa-rica',
@@ -65,6 +106,10 @@ const mockDestinations: Destination[] = [
     description: 'A biodiverse haven offering lush rainforests, stunning beaches, volcanoes, and abundant wildlife.',
     imageUrls: ['https://picsum.photos/seed/costarica/400/300'],
     tags: ['adventure', 'nature', 'wildlife', 'beach', 'eco-tourism'],
+     hotels: [
+        { id: 'hotel-costa-1', name: 'Nayara Gardens', price: '$500/night', imageUrl: 'https://picsum.photos/seed/hotelcosta1/200/150', description: 'Luxury bungalows near Arenal Volcano.' },
+        { id: 'hotel-costa-2', name: 'Andaz Costa Rica Resort at Peninsula Papagayo', price: '$700/night', imageUrl: 'https://picsum.photos/seed/hotelcosta2/200/150', description: 'Beachfront resort with modern design.' },
+    ],
   },
 ];
 
@@ -88,11 +133,11 @@ export async function getDestinations(filters?: {
   // In a real implementation, you would filter based on `filters.interests` here
   // For now, we return all mock destinations.
   // If filtering was implemented:
-  // if (filters?.interests && filters.interests.length > 0) {
-  //   return mockDestinations.filter(dest =>
-  //      filters.interests!.some(interest => dest.tags.includes(interest.toLowerCase()))
-  //   );
-  // }
+   if (filters?.interests && filters.interests.length > 0) {
+     return mockDestinations.filter(dest =>
+        filters.interests!.some(interest => dest.tags.includes(interest.toLowerCase()))
+     );
+   }
 
   return mockDestinations;
 }
@@ -112,3 +157,10 @@ export async function getDestinationById(id: string): Promise<Destination | null
   return destination || null;
 }
 
+// Optional: Function to get hotels for a specific destination
+export async function getHotelsByDestinationId(destinationId: string): Promise<Hotel[]> {
+   // Simulate network delay
+  await new Promise(resolve => setTimeout(resolve, 200));
+  const destination = mockDestinations.find(dest => dest.id === destinationId);
+  return destination?.hotels || [];
+}
