@@ -5,9 +5,22 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { CalendarClock } from 'lucide-react'; // Example icon
+import { Textarea } from '@/components/ui/textarea'; // Import Textarea
 
 export default function BookingPage() {
   // TODO: Implement actual booking form logic
+  // TODO: Fetch actual package details instead of using mock data
+  const mockPackage = {
+      name: "Parisian Dreams",
+      duration: "7 Days",
+      priceINR: 75000 // Example price in INR
+  };
+
+   const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0 }).format(amount);
+  };
+
+
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <Header />
@@ -20,8 +33,8 @@ export default function BookingPage() {
             <CardContent className="space-y-6">
                 {/* Placeholder for package selection or details */}
                  <div className="p-4 border rounded-md bg-secondary/50">
-                    <h3 className="font-semibold text-lg text-secondary-foreground">Selected Package: Parisian Dreams</h3>
-                    <p className="text-sm text-muted-foreground">7 Days - $1200</p>
+                    <h3 className="font-semibold text-lg text-secondary-foreground">Selected Package: {mockPackage.name}</h3>
+                    <p className="text-sm text-muted-foreground">{mockPackage.duration} - {formatCurrency(mockPackage.priceINR)}</p>
                  </div>
 
                <form className="space-y-4">
@@ -38,7 +51,7 @@ export default function BookingPage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                         <Label htmlFor="phone">Phone Number</Label>
-                        <Input id="phone" type="tel" placeholder="+1 234 567 890" />
+                        <Input id="phone" type="tel" placeholder="+91 XXXXX XXXXX" /> {/* Updated placeholder */}
                      </div>
                      <div className="space-y-2">
                         <Label htmlFor="travelers">Number of Travelers</Label>
@@ -66,24 +79,11 @@ export default function BookingPage() {
 }
 
 
-// Need Textarea Component if not already present
-import * as React from 'react';
-import {cn} from '@/lib/utils';
+// Textarea Component remains unchanged
+// import * as React from 'react';
+// import {cn} from '@/lib/utils';
 
-const Textarea = React.forwardRef<HTMLTextAreaElement, React.ComponentProps<'textarea'>>(
-  ({className, ...props}, ref) => {
-    return (
-      <textarea
-        className={cn(
-          'flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm',
-          className
-        )}
-        ref={ref}
-        {...props}
-      />
-    );
-  }
-);
-Textarea.displayName = 'Textarea';
+// const Textarea = React.forwardRef<HTMLTextAreaElement, React.ComponentProps<'textarea'>>(...)
+// Textarea.displayName = 'Textarea';
 
-export {Textarea};
+// export {Textarea};

@@ -43,7 +43,7 @@ export interface Destination {
   hotels: Hotel[];
 }
 
-// Enhanced mock data including hotels
+// Enhanced mock data including hotels with INR prices
 const mockDestinations: Destination[] = [
   {
     id: 'paris',
@@ -52,8 +52,8 @@ const mockDestinations: Destination[] = [
     imageUrls: ['https://picsum.photos/seed/paris/400/300'],
     tags: ['culture', 'romance', 'city', 'history'],
     hotels: [
-        { id: 'hotel-paris-1', name: 'Le Bristol Paris', price: '$1200/night', imageUrl: 'https://picsum.photos/seed/hotelparis1/200/150', description: 'Luxury palace hotel near Champs-Élysées.' },
-        { id: 'hotel-paris-2', name: 'Hotel Marignan Champs-Elysées', price: '$450/night', imageUrl: 'https://picsum.photos/seed/hotelparis2/200/150', description: 'Chic hotel with Eiffel Tower views.' },
+        { id: 'hotel-paris-1', name: 'Le Bristol Paris', price: '₹1,00,000/night', imageUrl: 'https://picsum.photos/seed/hotelparis1/200/150', description: 'Luxury palace hotel near Champs-Élysées.' },
+        { id: 'hotel-paris-2', name: 'Hotel Marignan Champs-Elysées', price: '₹38,000/night', imageUrl: 'https://picsum.photos/seed/hotelparis2/200/150', description: 'Chic hotel with Eiffel Tower views.' },
     ],
   },
   {
@@ -63,19 +63,19 @@ const mockDestinations: Destination[] = [
     imageUrls: ['https://picsum.photos/seed/borabora/400/300'],
     tags: ['relaxation', 'beach', 'luxury', 'tropical'],
     hotels: [
-        { id: 'hotel-bora-1', name: 'Four Seasons Resort Bora Bora', price: '$1800/night', imageUrl: 'https://picsum.photos/seed/hotelbora1/200/150', description: 'Iconic overwater bungalows and spa.' },
-        { id: 'hotel-bora-2', name: 'The St. Regis Bora Bora Resort', price: '$2200/night', imageUrl: 'https://picsum.photos/seed/hotelbora2/200/150', description: 'Ultimate luxury with private butlers.' },
+        { id: 'hotel-bora-1', name: 'Four Seasons Resort Bora Bora', price: '₹1,50,000/night', imageUrl: 'https://picsum.photos/seed/hotelbora1/200/150', description: 'Iconic overwater bungalows and spa.' },
+        { id: 'hotel-bora-2', name: 'The St. Regis Bora Bora Resort', price: '₹1,80,000/night', imageUrl: 'https://picsum.photos/seed/hotelbora2/200/150', description: 'Ultimate luxury with private butlers.' },
     ],
   },
   {
     id: 'mumbai',
     name: 'Mumbai, India',
-    description: 'The vibrant financial capital of India, known for Bollywood, colonial architecture, and bustling street life. Price per stay: $950.',
+    description: 'The vibrant financial capital of India, known for Bollywood, colonial architecture, and bustling street life.', // Removed price from description
     imageUrls: ['https://picsum.photos/seed/mumbai/400/300'],
     tags: ['culture', 'city', 'food', 'business'],
     hotels: [
-        { id: 'hotel-mumbai-1', name: 'The Taj Mahal Palace', price: '$350/night', imageUrl: 'https://picsum.photos/seed/hotelmumbai1/200/150', description: 'Historic luxury hotel overlooking the Gateway of India.' },
-        { id: 'hotel-mumbai-2', name: 'Trident Nariman Point', price: '$200/night', imageUrl: 'https://picsum.photos/seed/hotelmumbai2/200/150', description: 'Modern hotel with panoramic ocean views.' },
+        { id: 'hotel-mumbai-1', name: 'The Taj Mahal Palace', price: '₹28,000/night', imageUrl: 'https://picsum.photos/seed/hotelmumbai1/200/150', description: 'Historic luxury hotel overlooking the Gateway of India.' },
+        { id: 'hotel-mumbai-2', name: 'Trident Nariman Point', price: '₹15,000/night', imageUrl: 'https://picsum.photos/seed/hotelmumbai2/200/150', description: 'Modern hotel with panoramic ocean views.' },
     ],
   },
   {
@@ -85,8 +85,8 @@ const mockDestinations: Destination[] = [
     imageUrls: ['https://picsum.photos/seed/machupicchu/400/300'],
     tags: ['adventure', 'history', 'mountains', 'hiking'],
      hotels: [
-        { id: 'hotel-machu-1', name: 'Belmond Sanctuary Lodge', price: '$1500/night', imageUrl: 'https://picsum.photos/seed/hotelmachu1/200/150', description: 'Only hotel located adjacent to the citadel.' },
-        { id: 'hotel-machu-2', name: 'Inkaterra Machu Picchu Pueblo Hotel', price: '$600/night', imageUrl: 'https://picsum.photos/seed/hotelmachu2/200/150', description: 'Luxury eco-lodge in Aguas Calientes.' },
+        { id: 'hotel-machu-1', name: 'Belmond Sanctuary Lodge', price: '₹1,25,000/night', imageUrl: 'https://picsum.photos/seed/hotelmachu1/200/150', description: 'Only hotel located adjacent to the citadel.' },
+        { id: 'hotel-machu-2', name: 'Inkaterra Machu Picchu Pueblo Hotel', price: '₹50,000/night', imageUrl: 'https://picsum.photos/seed/hotelmachu2/200/150', description: 'Luxury eco-lodge in Aguas Calientes.' },
     ],
   },
   {
@@ -96,8 +96,8 @@ const mockDestinations: Destination[] = [
     imageUrls: ['https://picsum.photos/seed/santorini/400/300'],
     tags: ['romance', 'beach', 'island', 'views'],
      hotels: [
-        { id: 'hotel-santorini-1', name: 'Canaves Oia Suites', price: '$900/night', imageUrl: 'https://picsum.photos/seed/hotelsantorini1/200/150', description: 'Luxury suites with private plunge pools.' },
-        { id: 'hotel-santorini-2', name: 'Katikies Santorini', price: '$1100/night', imageUrl: 'https://picsum.photos/seed/hotelsantorini2/200/150', description: 'Cliffside hotel with infinity pools.' },
+        { id: 'hotel-santorini-1', name: 'Canaves Oia Suites', price: '₹75,000/night', imageUrl: 'https://picsum.photos/seed/hotelsantorini1/200/150', description: 'Luxury suites with private plunge pools.' },
+        { id: 'hotel-santorini-2', name: 'Katikies Santorini', price: '₹90,000/night', imageUrl: 'https://picsum.photos/seed/hotelsantorini2/200/150', description: 'Cliffside hotel with infinity pools.' },
     ],
   },
    {
@@ -107,8 +107,19 @@ const mockDestinations: Destination[] = [
     imageUrls: ['https://picsum.photos/seed/costarica/400/300'],
     tags: ['adventure', 'nature', 'wildlife', 'beach', 'eco-tourism'],
      hotels: [
-        { id: 'hotel-costa-1', name: 'Nayara Gardens', price: '$500/night', imageUrl: 'https://picsum.photos/seed/hotelcosta1/200/150', description: 'Luxury bungalows near Arenal Volcano.' },
-        { id: 'hotel-costa-2', name: 'Andaz Costa Rica Resort at Peninsula Papagayo', price: '$700/night', imageUrl: 'https://picsum.photos/seed/hotelcosta2/200/150', description: 'Beachfront resort with modern design.' },
+        { id: 'hotel-costa-1', name: 'Nayara Gardens', price: '₹40,000/night', imageUrl: 'https://picsum.photos/seed/hotelcosta1/200/150', description: 'Luxury bungalows near Arenal Volcano.' },
+        { id: 'hotel-costa-2', name: 'Andaz Costa Rica Resort at Peninsula Papagayo', price: '₹55,000/night', imageUrl: 'https://picsum.photos/seed/hotelcosta2/200/150', description: 'Beachfront resort with modern design.' },
+    ],
+  },
+  {
+    id: 'kyoto', // Added Kyoto back
+    name: 'Kyoto, Japan',
+    description: 'The cultural heart of Japan, famous for its beautiful temples, traditional gardens, and geisha district.',
+    imageUrls: ['https://picsum.photos/seed/kyoto/400/300'],
+    tags: ['culture', 'history', 'nature', 'spiritual'],
+    hotels: [
+      { id: 'hotel-kyoto-1', name: 'Ritz-Carlton Kyoto', price: '₹85,000/night', imageUrl: 'https://picsum.photos/seed/hotelkyoto1/200/150', description: 'Riverside luxury with traditional aesthetics.' },
+      { id: 'hotel-kyoto-2', name: 'Hyatt Regency Kyoto', price: '₹30,000/night', imageUrl: 'https://picsum.photos/seed/hotelkyoto2/200/150', description: 'Contemporary design in Higashiyama district.' },
     ],
   },
 ];

@@ -19,10 +19,18 @@ export default async function PackageDetailPage({ params }: { params: { slug: st
     notFound(); // Show 404 if destination/package not found
   }
 
-  // Mock package details based on destination
+  // Mock package details based on destination - Updated with INR prices
+  const getMockPrice = () => {
+    if (destination.tags.includes('luxury')) return '₹2,50,000+';
+    if (destination.tags.includes('adventure') || destination.tags.includes('mountains')) return '₹1,20,000';
+    if (destination.tags.includes('beach')) return '₹95,000';
+    if (destination.tags.includes('city') || destination.tags.includes('culture')) return '₹75,000';
+    return '₹80,000'; // Default price
+  };
+
   const mockPackage = {
       name: `${destination.name} Explorer`,
-      price: destination.tags.includes('luxury') ? '$3000+' : (destination.tags.includes('adventure') ? '$1500' : '$1000'),
+      price: getMockPrice(),
       duration: destination.tags.includes('city') ? '5 Days' : (destination.tags.includes('beach') ? '7 Days' : 'Varies'),
       description: `An amazing package exploring the wonders of ${destination.name}. Immerse yourself in ${destination.tags.join(', ')}. ${destination.description}`,
       inclusions: ['Guided Tours', 'Airport Transfers', destination.tags.includes('beach') ? 'Snorkeling Gear' : 'Museum Passes', 'Accommodation Options Below'], // Updated inclusion

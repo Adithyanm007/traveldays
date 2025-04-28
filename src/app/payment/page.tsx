@@ -8,6 +8,20 @@ import { CreditCard, Lock } from 'lucide-react'; // Example icons
 
 export default function PaymentPage() {
   // TODO: Implement actual payment processing logic (e.g., Stripe integration)
+  // TODO: Fetch actual order details instead of using mock data
+
+  const mockOrder = {
+    packageName: "Parisian Dreams", // Example package name
+    basePrice: 75000, // Example base price in INR
+    taxesAndFees: 7500, // Example taxes in INR
+    totalAmount: 82500 // Example total in INR
+  };
+
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0 }).format(amount);
+  };
+
+
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <Header />
@@ -22,17 +36,17 @@ export default function PaymentPage() {
                  <div className="p-4 border rounded-md bg-secondary/50">
                     <h3 className="font-semibold text-lg text-secondary-foreground">Order Summary</h3>
                      <div className="flex justify-between text-sm mt-2">
-                        <span>Package: Parisian Dreams</span>
-                        <span>$1200.00</span>
+                        <span>Package: {mockOrder.packageName}</span>
+                        <span>{formatCurrency(mockOrder.basePrice)}</span>
                      </div>
                       <div className="flex justify-between text-sm text-muted-foreground">
                         <span>Taxes & Fees</span>
-                        <span>$120.00</span>
+                        <span>{formatCurrency(mockOrder.taxesAndFees)}</span>
                      </div>
                       <hr className="my-2 border-border"/>
                       <div className="flex justify-between font-semibold">
                         <span>Total Amount</span>
-                        <span>$1320.00</span>
+                        <span>{formatCurrency(mockOrder.totalAmount)}</span>
                      </div>
                  </div>
 
@@ -60,7 +74,7 @@ export default function PaymentPage() {
                   </div>
 
                   <Button type="submit" size="lg" className="w-full bg-accent hover:bg-accent/90">
-                     <Lock className="mr-2 h-5 w-5"/> Pay $1320.00 Securely
+                     <Lock className="mr-2 h-5 w-5"/> Pay {formatCurrency(mockOrder.totalAmount)} Securely
                   </Button>
                </form>
             </CardContent>
